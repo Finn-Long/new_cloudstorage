@@ -18,9 +18,9 @@ public class FileService {
 
     public int storeFile(MultipartFile file, Integer userId) throws IOException {
         String fileName = file.getOriginalFilename();
-        String fileSize = file.getBytes().toString();
+        String fileSize = String.valueOf(file.getSize());
         String fileType = file.getContentType();
-        return fileMapper.insert(new File(0, fileName, fileType, fileSize, userId, file.getBytes()));
+        return fileMapper.insert(new File(null, fileName, fileType, fileSize, userId, file.getBytes()));
     }
 
     public List<File> getAllFiles(Integer userId) {

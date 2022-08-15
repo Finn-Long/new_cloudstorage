@@ -76,7 +76,7 @@ public class FileController {
                 fileService.storeFile(file, userId);
                 model.addAttribute("isSuccess", true);
                 model.addAttribute("successMsg", "file " + file.getOriginalFilename() + " has been uploaded");
-            }catch(IOException e) {
+            }catch(Exception e) {
                 model.addAttribute("isError", true);
                 model.addAttribute("errorMsg", "Please try again later");
             }
@@ -84,7 +84,6 @@ public class FileController {
             model.addAttribute("isError", true);
             model.addAttribute("errorMsg", err_msg);
         }
-        System.out.println(err_msg);
         return "result";
     }
 }

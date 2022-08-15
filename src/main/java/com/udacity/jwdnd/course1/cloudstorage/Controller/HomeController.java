@@ -1,11 +1,13 @@
 package com.udacity.jwdnd.course1.cloudstorage.Controller;
 
+import com.udacity.jwdnd.course1.cloudstorage.Model.NoteForm;
 import com.udacity.jwdnd.course1.cloudstorage.Model.User;
 import com.udacity.jwdnd.course1.cloudstorage.Service.*;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -27,7 +29,7 @@ public class HomeController {
     }
 
     @GetMapping
-    public String getHomeView(Authentication auth, Model model) {
+    public String getHomeView(Authentication auth, Model model, @ModelAttribute("noteForm")NoteForm noteForm) {
         User cur_User = userService.getCurrentUser(auth);
         Integer userId = cur_User.getUserId();
         model.addAttribute("files", fileService.getAllFiles(userId));
