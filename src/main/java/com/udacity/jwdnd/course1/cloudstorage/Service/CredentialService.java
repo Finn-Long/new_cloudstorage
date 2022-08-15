@@ -27,14 +27,8 @@ public class CredentialService {
         return credentialMapper.insert(credential);
     }
 
-    public List<Credential> getAllEncrypted() {
-        return credentialMapper.getAllCredentials();
-    }
-
-    public String getUnencrypted(Credential credential) {
-        String encryptedPassword = credential.getPassword();
-        String key = credential.getKey();
-        return encryptionService.encryptValue(encryptedPassword, key);
+    public List<Credential> getAllEncrypted(Integer userId) {
+        return credentialMapper.getAllCredentials(userId);
     }
 
     public int editCredential(Credential credential) {
