@@ -16,7 +16,7 @@ public class FileService {
         this.fileMapper = fileMapper;
     }
 
-    public int storeFile(MultipartFile file, Integer userId) throws IOException {
+    public Integer storeFile(MultipartFile file, Integer userId) throws IOException {
         String fileName = file.getOriginalFilename();
         String fileSize = String.valueOf(file.getSize());
         String fileType = file.getContentType();

@@ -12,10 +12,12 @@ import java.util.List;
 public class CredentialService {
     private final CredentialMapper credentialMapper;
     private final EncryptionService encryptionService;
+    private final HashService hashService;
 
-    public CredentialService(CredentialMapper credentialMapper, EncryptionService encryptionService) {
+    public CredentialService(CredentialMapper credentialMapper, EncryptionService encryptionService, HashService hashService) {
         this.credentialMapper = credentialMapper;
         this.encryptionService = encryptionService;
+        this.hashService = hashService;
     }
 
     public int createCredential(Credential credential) {
@@ -23,6 +25,7 @@ public class CredentialService {
         String encodedKey = generateKey();
         String hashedPassword = encryptionService.encryptValue(password, encodedKey);
         credential.setKey(encodedKey);
+        System.out.println("key=" + encodedKey);
         credential.setPassword(hashedPassword);
         return credentialMapper.insert(credential);
     }
@@ -40,8 +43,13 @@ public class CredentialService {
         return credentialMapper.update(newUrl, newUsername, newKey, encrypedPassword, credential.getCredentialId());
     }
 
-    public int deleteCredential(int credentialId) {
+    public int deleteCredential(Integer credentialId) {
         return credentialMapper.delete(credentialId);
+    }
+
+
+    public Credential getCredential(Integer credential_Id) {
+        return credentialMapper.getCredential(credential_Id);
     }
 
     private String generateKey() {

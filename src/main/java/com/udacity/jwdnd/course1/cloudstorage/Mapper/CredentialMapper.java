@@ -10,8 +10,7 @@ public interface CredentialMapper {
     @Select("SELECT * FROM CREDENTIALS WHERE userid = #{userId}")
     List<Credential> getAllCredentials(Integer userId);
 
-    @Insert("INSERT INTO CREDENTIALS(url, username, key, password, userid) VALUES(#{url}, #{username " +
-            "#{key}, #{password}, #{userId})")
+    @Insert("INSERT INTO CREDENTIALS(url, username, key, password, userid) VALUES(#{url}, #{username}, #{key}, #{password}, #{userId})")
     @Options(useGeneratedKeys = true, keyProperty = "credentialId")
     int insert(Credential credential);
 
@@ -20,4 +19,7 @@ public interface CredentialMapper {
 
     @Update("UPDATE CREDENTIALS SET url = #{url}, username = #{username}, key = #{key}, password = #{password} WHERE credentialid = #{credentialId}")
     int update(String url, String username, String key, String password, int credentialId);
+
+    @Select("SELECT * FROM CREDENTIALS WHERE credentialid = #{credential_Id}")
+    Credential getCredential(Integer credential_Id);
 }

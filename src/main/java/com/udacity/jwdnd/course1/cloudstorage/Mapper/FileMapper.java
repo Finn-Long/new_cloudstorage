@@ -14,10 +14,10 @@ public interface FileMapper {
     @Select("SELECT * FROM FILES WHERE userid = #{userId}")
     List<File> getAllFiles(Integer userId);
 
-    @Select("SELECT FROM FILES WHERE filename = #{fileName}")
+    @Select("SELECT * FROM FILES WHERE filename = #{fileName}")
     File getFile(String fileName);
 
-    @Select("SELECT FROM FILES WHERE fileId = #{file_id}")
+    @Select("SELECT * FROM FILES WHERE fileId = #{file_id}")
     File getFileById(Integer file_id);
 
     @Select("INSERT INTO FILES(filename, contenttype, filesize, userid, filedata) VALUES(#{fileName}, " +
